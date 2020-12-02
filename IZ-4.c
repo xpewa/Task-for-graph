@@ -39,6 +39,9 @@ tVertex* find_even_vertex(tGraph* graph) {
             if (graph->matrix[i][j] == 1)
                 ++vertices[i].degreeVertex;
     }
+    for (int i=0; i < graph->count_vertex; ++i)
+        if (vertices[i].degreeVertex % 2!=0)
+            vertices[i].vertex=-1;
     return vertices;
 }
 
@@ -74,7 +77,7 @@ void read_matrix(tGraph* Graph) {
                 scanf("%*[^\n]");
 }
 
-int main()
+int main(void)
 {
     system("cls");
     system("color 70");
@@ -96,7 +99,8 @@ int main()
     insertion_sort(vertices, Graph->count_vertex);
     printf("Sorting vertices:\n");
     for (int i=0; i < Graph->count_vertex; ++i) {
-        printf("%d ", vertices[i].vertex);
+        if (vertices[i].vertex!=-1)
+            printf("%d ", vertices[i].vertex);
     }
 
     free(vertices);
